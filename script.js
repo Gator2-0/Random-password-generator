@@ -19,7 +19,7 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
-// generate the password based on a set of user-input criteria
+// generate the password based on a set of user-input criteria if isValid is true.
 //
 function generatePassword(l, up, lo, nu, sp){
   var password = '';
@@ -28,53 +28,75 @@ function generatePassword(l, up, lo, nu, sp){
   console.log('Now starting password generation...')
   console.log('l='+l);
 
-  for (let index = 0; index < l; index++) {
-    var randomchar = Math.floor(Math.random() * 4);
-    console.log('randomChar='+ randomchar+' index='+ index);
-    if(randomchar == 0 && up){//return a random uppercase letter
-      var subStart = Math.floor(Math.random() * (letterList.length + 1)) ;
-      var upperLetterChosen = letterList.substring(
-        subStart,
-        subStart + 1
-      )
-      console.log(upperLetterChosen.toLowerCase());
-      password += upperLetterChosen.toUpperCase();
-      index++
+  if(isValid(up, lo, nu, sp)){
 
-    }else if(randomchar == 1 && lo){//return a random lowercase letter
-      var subStart = Math.floor(Math.random() * (letterList.length + 1)) ;
-      var lowerLetterChosen = letterList.substring(
-        subStart,
-        subStart + 1
-      )
-      console.log(lowerLetterChosen);
-      password += lowerLetterChosen;
-      index++
-
-    }else if(randomchar == 2 && nu){//return a random numeric value from 0 to 9
-      var numChosen  = Math.floor(Math.random() * 10);
-      console.log(numChosen);
-      password += numChosen;
-      index++
-
-    }else if(randomchar == 3 && sp){//return a random special character
-      var subStart = Math.floor(Math.random() * (specialList.length + 1)) ;
-      var specCharChosen = specialList.substring(
-        subStart,
-        subStart + 1
-      )
-      console.log(specCharChosen);
-      password += specCharChosen;
-      index++;
-
+    for (let index = 0; index < l; index++) {
+      var randomchar = Math.floor(Math.random() * 4);
+      console.log('randomChar='+ randomchar+' index='+ index);
+      if(randomchar == 0 && up){//return a random uppercase letter
+        var subStart = Math.floor(Math.random() * (letterList.length + 1)) ;
+        var upperLetterChosen = letterList.substring(
+          subStart,
+          subStart + 1
+        )
+        console.log(upperLetterChosen.toUpperCase());
+        password += upperLetterChosen.toUpperCase();
+        index++
+  
+      }else if(randomchar == 1 && lo){//return a random lowercase letter
+        var subStart = Math.floor(Math.random() * (letterList.length + 1)) ;
+        var lowerLetterChosen = letterList.substring(
+          subStart,
+          subStart + 1
+        )
+        console.log(lowerLetterChosen);
+        password += lowerLetterChosen;
+        index++
+  
+      }else if(randomchar == 2 && nu){//return a random numeric value from 0 to 9
+        var numChosen  = Math.floor(Math.random() * 10);
+        console.log(numChosen);
+        password += numChosen;
+        index++
+  
+      }else if(randomchar == 3 && sp){//return a random special character
+        var subStart = Math.floor(Math.random() * (specialList.length + 1)) ;
+        var specCharChosen = specialList.substring(
+          subStart,
+          subStart + 1
+        )
+        console.log(specCharChosen);
+        password += specCharChosen;
+        index++;
+  
+      }
+      index--;
+      /*in case the user did not want the selected choice. 
+      ie: no uppercase wanted but randomChar = 0  
+      then the code will run again until a valid choice is chosen*/      
     }
-    index--;
-    /*in case the user did not want the selected choice. 
-    ie: no uppercase wanted but randomChar = 0  
-    then the code will run again until a valid choice is chosen*/      
-  }
 
-  return password;
+    return password;
+
+  }else{
+    
+    return "Wow!? A password witout any character isn't safe at all. Try again and accept at least one criteria!!"
+  }
+  
+}
+
+//checking if at least one criteria has been chosen
+
+function isValid(a ,b ,c ,d){
+  if(a || b || c || d){
+    console.log('The criteria are valid');
+    return true;
+    
+  }else{
+    console.log('The criteria are NOT valid')
+    return false;
+  }
+  
 }
 
 //gathering criteria from user:

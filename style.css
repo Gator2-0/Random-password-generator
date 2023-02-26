@@ -118,6 +118,13 @@ button[disabled] {
   overflow: hidden;
 }
 
+footer {
+  padding: 30px;
+  clear: both;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+}
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
